@@ -2,31 +2,27 @@
   <div class="container">
     <h1>Register Form</h1>
     <form (ngSubmit)="register()" #registerForm="ngForm">
-      
+
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" class="form-control" 
-               placeholder="email" 
-               pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-               id="email" required [(ngModel)]="model.email" name="email" #email="ngModel">
-       
+        <input type="email" class="form-control" placeholder="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="email"
+          required [(ngModel)]="model.email" name="email" #email="ngModel">
+
 
         <div class="alert alert-danger" [hidden]="email.valid || email.untouched">
-            <div  *ngIf="email.errors && email.errors.required">
-                Email is required
-            </div>
-            <div  *ngIf="email.errors && email.errors.pattern">
-                Email is invalid
-            </div>
+          <div *ngIf="email.errors && email.errors.required">
+            Email is required
+          </div>
+          <div *ngIf="email.errors && email.errors.pattern">
+            Email is invalid
+          </div>
         </div>
-
-
-
       </div>
 
       <div class="form-group">
-          <label for="name">Name</label>
-        <input id="name" name="name" class="form-control" placeholder="name" required minlength="4" appForbiddenName="bob" [(ngModel)]="model.name" #name="ngModel">
+        <label for="name">Name</label>
+        <input id="name" name="name" class="form-control" placeholder="name" required minlength="4" appForbiddenName="bob" [(ngModel)]="model.name"
+          #name="ngModel">
         <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
           <div *ngIf="name.errors.required">
             Name is required.
@@ -44,6 +40,12 @@
         <label for="Password">Password</label>
         <input type="password" class="form-control" id="password" placeholder="password" required [(ngModel)]="model.password" name="password">
       </div>
+
+      <div class="form-group">
+        <label for="retypepassword">Retype Password</label>
+        <input type="retypepassword" class="form-control" id="retypepassword" placeholder="retype password" required [(ngModel)]="model.retypepassword" name="retypepassword">
+      </div>
+      <div [hidden]="model.password == model.retypepassword" class="alert alert-danger">Passwords do not match!</div>
 
 
       <div class="form-group">
@@ -66,11 +68,14 @@
       <button type="submit" class="btn btn-success" [disabled]="!registerForm.form.valid">Submit</button>
 
       <button type="button" class="btn btn-default" (click)="newUser(); registerForm.reset()">New User</button>
+      <br/>
+      <br/>
+      <div class="form-group">
+        Find the code here: https://github.com/cknitin/angular-forms-demo
+      </div>
 
     </form>
   </div>
 </div>
-
-
 
 <h1> {{ message }} </h1>

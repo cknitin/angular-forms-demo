@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -12,7 +11,7 @@ export class RegisterComponent implements OnInit {
   message: string;
 
   age = [20, 30, 40, 50, 60];
-  model = new User('', '', '', '1', 20);
+  model = new User('', '', '', '', '1', 20);
 
   constructor() { }
 
@@ -26,8 +25,6 @@ export class RegisterComponent implements OnInit {
   }
 
   public newUser() {
-    this.model = new User('', '', '', 'Male', 20);
+    this.model = new User('', '', '', '', 'Male', 20);
   }
-
-
 }
