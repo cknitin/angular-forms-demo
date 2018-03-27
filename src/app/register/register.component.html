@@ -1,0 +1,76 @@
+<div [hidden]="submitted">
+  <div class="container">
+    <h1>Register Form</h1>
+    <form (ngSubmit)="register()" #registerForm="ngForm">
+      
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" 
+               placeholder="email" 
+               pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+               id="email" required [(ngModel)]="model.email" name="email" #email="ngModel">
+       
+
+        <div class="alert alert-danger" [hidden]="email.valid || email.untouched">
+            <div  *ngIf="email.errors && email.errors.required">
+                Email is required
+            </div>
+            <div  *ngIf="email.errors && email.errors.pattern">
+                Email is invalid
+            </div>
+        </div>
+
+
+
+      </div>
+
+      <div class="form-group">
+          <label for="name">Name</label>
+        <input id="name" name="name" class="form-control" placeholder="name" required minlength="4" appForbiddenName="bob" [(ngModel)]="model.name" #name="ngModel">
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+          <div *ngIf="name.errors.required">
+            Name is required.
+          </div>
+          <div *ngIf="name.errors.minlength">
+            Name must be at least 4 characters long.
+          </div>
+          <div *ngIf="name.errors.forbiddenName">
+            Name cannot be Bob.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="Password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="password" required [(ngModel)]="model.password" name="password">
+      </div>
+
+
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <br> Male
+        <input name="options" type="radio" [(ngModel)]="model.gender" [value]="1" [checked]="model.gender==1" />
+        <br/> Female
+        <input name="options" type="radio" [(ngModel)]="model.gender" [value]="2" [checked]="model.gender==2" />
+        <br/>
+
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age</label>
+        <select class="form-control" id="age" required [(ngModel)]="model.age" name="age" required>
+          <option *ngFor="let ag of age" [value]="ag">{{ag}}</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!registerForm.form.valid">Submit</button>
+
+      <button type="button" class="btn btn-default" (click)="newUser(); registerForm.reset()">New User</button>
+
+    </form>
+  </div>
+</div>
+
+
+
+<h1> {{ message }} </h1>
